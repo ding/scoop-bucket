@@ -6,20 +6,21 @@
   "hash": "89ed3f0d8f6c3976a76594e659067a3fa57840a0cb44c601f8b36cc21f87b7c5",
   "extract_dir": "HackGen_v2.8.0",
   "installer": {
-    "script": "
-            Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {
-                New-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Value $_.Name -Force | Out-Null
-                Copy-Item \"$dir\\$_\" -destination \"$env:windir\\Fonts\"
-            }
-        "
+    "script": [
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
+            "  $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
+            "  New-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Value \"$fontdir\\$($_.Name)\" -Force | Out-Null",
+            "  Copy-Item $_.Fullname -destination \"$fontdir\"",
+            "}"
+    ]
   },
   "uninstaller": {
-    "script": "
-            Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {
-                Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Force -ErrorAction SilentlyContinue
-                Remove-Item \"$env:windir\\Fonts\\$($_.Name)\" -Force -ErrorAction SilentlyContinue
-            }
-            Write-Host \"The 'HackGen' Font family has been uninstalled and will not be present after restarting your computer.\" -Foreground Magenta
-        "
+    "script": [
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
+            "  $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
+            "  Remove-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Force -ErrorAction SilentlyContinue",
+            "  Remove-Item \"$fontdir\\$($_.Name)\" -Force -ErrorAction SilentlyContinue",
+            "}"
+    ]
   }
 }
