@@ -1,0 +1,26 @@
+{
+  "version": "1.2.1",
+  "license": "custom",
+  "homepage": "https://github.com/yuru7/udev-gothic",
+  "url": "https://github.com/yuru7/udev-gothic/releases/download/v1.2.1/UDEVGothic_NF_v1.2.1.zip",
+  "hash": "5b65e4b0d45ef2f928c2b7a76c2c50aede1f581dbbb9f2f5e9af1533fa939ad0",
+  "extract_dir": "UDEVGothic_NF_v1.2.1",
+  "installer": {
+    "script": [
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
+            "  $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
+            "  New-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Value \"$fontdir\\$($_.Name)\" -Force | Out-Null",
+            "  Copy-Item $_.Fullname -destination \"$fontdir\"",
+            "}"
+    ]
+  },
+  "uninstaller": {
+    "script": [
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
+            "  $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
+            "  Remove-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Force -ErrorAction SilentlyContinue",
+            "  Remove-Item \"$fontdir\\$($_.Name)\" -Force -ErrorAction SilentlyContinue",
+            "}"
+    ]
+  }
+}
