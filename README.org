@@ -1,4 +1,4 @@
-* lurdan bucket for scoop
+* ding bucket for scoop frok from lurdan bucket
 
 開発元の buckets に含まれることのなさそうな scoop manifest 集です
 
@@ -13,9 +13,9 @@ scoop install git
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 #+END_SRC
 
-*** scoop に lurdan bucket を追加
+*** scoop に ding bucket を追加
 #+BEGIN_SRC cmd
-scoop bucket add lurdan https://github.com/lurdan/scoop-bucket
+scoop bucket add lurdan https://github.com/ding/scoop-bucket
 #+END_SRC
 
 ** 含まれている manifests
