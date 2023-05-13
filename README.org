@@ -1,6 +1,6 @@
-* ding bucket for scoop frok from lurdan bucket
+* ding bucket for scoop forked from lurdan bucket
 
-開発元の buckets に含まれることのなさそうな scoop manifest 集です
+開発元用の合成フォントと一部のツールのscoop manifest 集です
 
 ** 使い方
 *** git コマンドが必要
@@ -19,42 +19,17 @@ scoop bucket add lurdan https://github.com/ding/scoop-bucket
 #+END_SRC
 
 ** 含まれている manifests
-*** 日本人専用なあれこれ
-日本語関連や、海外ユーザが少なそうなもの
-
-- SKK 関連
-  - crvskkserv
-  - meskkdic
+*** 合成フォント
 
 - 日本語フォント
-  - Myrica
-  - Nasu
-  - 源瑛ゴシック
+  - HackGen
+  - HackGen_NF
+  - UDEVGothic
+  - UDEVGothic_NF
 
-- その他
-  - memclx
-  - putty-d2ddw
-  - lhaforge
-  - memclx
+*** Memo
+Get file's hash code
+#+BEGIN_SRC cmd
+certutil -hashfile hashfile-name SHA256
+#+END_SRC
 
-*** 自分専用に調整しているもの
-- ntemacs64
-
-*** 自分は使うけど見当たらないもの
-開発元に追加され次第、消えていきます
-
-- bug.n
-- quicklook
-- realvnc
-
-*** 保留
-- 調整中
-  - asr
-  - groonga
-
-- そのうち削除予定
-  - limechat
-  - putty-gdi
-  - vdesk
-  - vivaldi
-  - wceskkserv
